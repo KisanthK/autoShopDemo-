@@ -1,0 +1,1552 @@
+/*
+====================================
+  1. GLOBAL VARIABLES AND RESET
+====================================
+*/
+:root {
+    --primary-color: #0c182a;         /* Very Dark Navy (Main Background) */
+    --secondary-bg-color: #f8f9fa;    /* Ultra-light gray (Contrast Sections) */
+    --accent-color: #007bff;          /* Vibrant Blue (Primary CTA/Focus) */
+    --secondary-accent: #ffb700;      /* Muted Amber/Gold (Trust/Secondary CTA) */
+    --light-text-color: #ffffff;
+    --secondary-color: #1a3854;       /* Used for form background/footer text */
+    
+    /* High-End Shadows */
+    --shadow-deep: 0 18px 50px rgba(0, 0, 0, 0.4); 
+    --shadow-soft: 0 5px 20px rgba(0, 0, 0, 0.12); 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-color);
+    line-height: 1.6; 
+}
+
+.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 0 40px; 
+}
+
+.section {
+    padding: 120px 0; 
+    position: relative;
+    overflow: hidden; 
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3.5rem; 
+    margin-bottom: 70px;
+    font-weight: 900; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-title-small {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+
+/* ------------------------------------
+  2. BUTTONS AND CTAS
+------------------------------------ */
+.btn {
+    padding: 18px 50px; 
+    border-radius: 6px; 
+    font-weight: 700;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.6);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.7); 
+}
+
+.btn-secondary-outline {
+    background: none;
+    border: 2px solid var(--light-text-color);
+    color: var(--light-text-color);
+    margin-left: 20px;
+}
+.btn-secondary-outline:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.btn-secondary-accent {
+    background-color: var(--secondary-accent);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 183, 0, 0.4);
+}
+.btn-secondary-accent:hover {
+    background-color: #e6a700;
+    transform: translateY(-2px);
+}
+
+.btn-text-cta {
+    display: inline-block;
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.btn-text-cta:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+
+/* ------------------------------------
+  3. HEADER / NAVIGATION (Desktop)
+------------------------------------ */
+#main-header {
+    background-color: transparent;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Scrolled state for Header */
+#main-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo h1 {
+    font-size: 2.3rem; 
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--light-text-color); 
+    transition: color 0.3s ease;
+}
+
+/* Color adjustments for links and logo when scrolled */
+#main-header.scrolled .logo h1,
+#main-header.scrolled .main-nav a {
+    color: var(--primary-color); 
+}
+
+.main-nav a {
+    color: var(--light-text-color);
+    margin-left: 40px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-cta {
+    padding: 10px 22px; 
+    border-radius: 8px;
+    margin-left: 40px;
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+}
+.nav-cta:hover {
+    background-color: #0056b3;
+}
+
+/* Hide menu toggle button on large screens */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--light-text-color);
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1001;
+}
+#main-header.scrolled .menu-toggle {
+    color: var(--primary-color);
+}
+
+/* --- HEADER OVERLAP FIX --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    flex-wrap: nowrap; /* Prevents logo and nav from ever splitting rows */
+}
+
+.logo {
+    flex-shrink: 0; /* Forces logo to maintain its size */
+    margin-right: 20px;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevents the nav container from collapsing */
+}
+
+.main-nav a {
+    white-space: nowrap; /* CRITICAL: Prevents "Book Appointment" from wrapping into two lines */
+    margin-left: 25px; /* Slightly reduced for better fit on tablets */
+}
+
+/* --- SERVICE UI ENHANCEMENTS --- */
+.service-intro-container {
+    margin-bottom: 50px;
+    max-width: 900px;
+}
+
+.mission-statement {
+    margin-top: 20px;
+    padding-left: 25px;
+    border-left: 5px solid var(--accent-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.card-header-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 15px;
+}
+
+.card-header-group h3 {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    border-bottom: none !important; /* Cleaner look for the new grid */
+}
+
+.detail-list li i {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+}
+
+/* Transition for Unique UX */
+.service-detail-card:hover {
+    transform: translateY(-10px);
+    border-top-color: var(--secondary-accent);
+} 
+/* --- Standout Services Section with Tool.jpg --- */
+/* --- Service Section Standout Styling --- */
+.service-standout {
+    position: relative;
+    /* High-contrast dark overlay to make white text pop */
+    background:
+                url('tool.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Creates a high-end parallax effect */
+    padding: 100px 0;
+}
+
+.standout-title {
+    color: var(--light-text-color) !important;
+    font-size: 4rem;
+    text-shadow: 2px 4px 15px rgba(0,0,0,0.6);
+    margin-bottom: 30px;
+}
+
+.standout-text p {
+    color: #ffffff !important;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    font-weight: 400;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ------------------------------------
+  4. HERO SECTION
+------------------------------------ */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background-color: var(--primary-color);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#heroVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35; 
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 5;
+    padding-top: 100px; 
+}
+
+.hero-content {
+    color: var(--light-text-color);
+    max-width: 1000px;
+}
+
+.hero-content h1 {
+    font-size: 7.5rem; 
+    font-weight: 900;
+    line-height: 1.0;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.hero-content h1 span {
+    display: block;
+    letter-spacing: 10px;
+    opacity: 0.9;
+}
+.hero-content .word-1 { color: var(--accent-color); font-size: 8rem; }
+.hero-content .word-2 { color: var(--secondary-accent); margin-left: 100px; }
+.hero-content .word-3 { color: var(--light-text-color); font-size: 8.5rem; }
+
+.hero-content p {
+    font-size: 1.8rem;
+    max-width: 700px;
+    margin-bottom: 60px;
+    font-weight: 300;
+}
+
+
+/* ------------------------------------
+  5. INFO BAR
+------------------------------------ */
+.info-bar-section {
+    padding: 40px 0;
+    background-color: var(--secondary-accent); 
+    position: relative;
+    z-index: 10; 
+}
+
+.info-bar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.info-card {
+    color: var(--primary-color);
+}
+.info-card i {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.info-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+
+/* ------------------------------------
+  6. SERVICES SECTION
+------------------------------------ */
+.apparent-services-section {
+    background-color: var(--secondary-bg-color); 
+}
+
+.static-service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px;
+}
+
+.service-detail-card {
+    background-color: var(--light-text-color);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    border-top: 5px solid var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.service-icon-lg {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.service-detail-card h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.service-detail-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 25px;
+    min-height: 45px; 
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.detail-list li {
+    font-size: 0.95rem;
+    padding: 8px 0;
+    color: var(--primary-color);
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+}
+
+.detail-list li i {
+    color: var(--secondary-accent);
+    margin-right: 10px;
+}
+
+/* --- Service Image Styling (CRITICAL for Layout) --- */
+.service-image-small {
+    width: 100%;
+    height: 120px; /* Fixed height for uniformity */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+
+/* ------------------------------------
+  7. ABOUT/TRUST SECTION
+------------------------------------ */
+.about-trust-section {
+    background-color: var(--secondary-bg-color);
+    padding-bottom: 150px;
+}
+
+.about-trust-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.key-success-list {
+    list-style: none;
+    margin-bottom: 40px;
+    padding-left: 0;
+}
+
+.key-success-list li {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    font-weight: 500;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+}
+
+.key-success-list li i {
+    color: var(--accent-color);
+    margin-right: 15px;
+}
+
+.testimonial-bubble {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform: rotate(-1deg); 
+    transition: transform 0.3s ease;
+}
+.testimonial-bubble:hover {
+    transform: rotate(0deg);
+}
+
+.quote-icon {
+    font-size: 3rem;
+    color: var(--secondary-accent);
+    margin-bottom: 15px;
+}
+
+.quote-text {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.quote-author {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--secondary-accent);
+}
+
+/* --- Testimonial Image Styling (CRITICAL for Layout) --- */
+.testimonial-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 25px;
+    display: block;
+}
+
+
+/* ------------------------------------
+  8. CONTACT STRIP
+------------------------------------ */
+.contact-strip-section {
+    background: linear-gradient(90deg, #0056b3 0%, var(--accent-color) 100%);
+    color: var(--light-text-color);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.strip-content h2 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+.strip-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+
+/* ------------------------------------
+  9. FOOTER / CONTACT
+------------------------------------ */
+footer {
+    background-color: var(--primary-color); 
+    color: rgba(255, 255, 255, 0.9);
+    padding-top: 60px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    gap: 50px;
+    padding-bottom: 60px;
+}
+
+.footer-col h3 {
+    color: var(--secondary-accent);
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+}
+
+.footer-col p {
+    margin-bottom: 10px;
+}
+
+.footer-col i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.social-icons a {
+    color: var(--light-text-color);
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+.social-icons a:hover {
+    color: var(--secondary-accent);
+}
+
+.form-widget input,
+.form-widget select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #44688b;
+    background-color: var(--secondary-color); 
+    color: var(--light-text-color);
+    font-size: 1rem;
+}
+.form-widget input::placeholder,
+.form-widget select {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* ====================================
+  10. RESPONSIVE DESIGN & MOBILE MENU FIXES
+====================================
+*/
+
+/* --- Tablet/Medium Screens (1200px and below) --- */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 30px;
+    }
+    .hero-content h1 {
+        font-size: 5rem;
+    }
+    .hero-content .word-1 { font-size: 5.5rem; }
+    .hero-content .word-3 { font-size: 6rem; }
+
+    /* Service Grid: 4 columns -> 2 columns */
+    .static-service-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 30px;
+    }
+    .about-trust-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Mobile/Small Screens (768px and below) --- */
+@media (max-width: 768px) {
+    .section { padding: 80px 0; }
+    .section-title { font-size: 2.2rem; }
+    
+    /* Hero on Mobile (No change necessary here) */
+    .hero-section { height: 75vh; }
+    .hero-content { padding-top: 0; }
+    .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    .hero-content h1 span {
+        letter-spacing: 5px;
+    }
+    .hero-content .word-1,
+    .hero-content .word-2,
+    .hero-content .word-3 {
+        font-size: 2.8rem;
+        margin-left: 0;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    .cta-group { flex-direction: column; }
+    .btn { width: 100%; margin: 10px 0 0 0 !important; }
+
+    /* Info Bar (No change necessary here) */
+    .info-bar-grid { grid-template-columns: 1fr; gap: 20px; }
+    
+    /* Services Grid (No change necessary here) */
+    .static-service-grid {
+        grid-template-columns: 1fr; 
+        gap: 25px;
+    }
+
+    /* About/Trust (No change necessary here) */
+    .testimonial-bubble { transform: rotate(0deg); }
+    .trust-content { order: -1; }
+    
+    /* Footer (No change necessary here) */
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+    .footer-col i { 
+        display: inline-block; 
+    } 
+
+    /* === MOBILE MENU OVERLAY FIXES === */
+    
+    /* 1. Header Container Z-index FIX: Ensure the Logo and Toggle are on top of the menu */
+    .header-container {
+        position: relative; 
+        z-index: 1002; /* Higher than the menu's 999 and the toggle's 1001 */
+    }
+
+    /* Show hamburger icon on small screens */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hide the standard navigation and make it full-screen overlay when active */
+    .main-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--primary-color); 
+        padding-top: 100px;
+        text-align: center;
+        flex-direction: column;
+        z-index: 999;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    /* State when menu is open */
+    .main-nav.active {
+        display: flex; 
+        opacity: 1; 
+    }
+
+    /* 2. Link Color FIX: Ensure links are white against the dark background */
+    .main-nav a {
+        color: var(--light-text-color); /* <--- CRITICAL FIX */
+        margin: 20px 0; 
+        font-size: 1.5rem;
+        display: block; 
+        padding: 10px; /* Added padding for easier tapping */
+    }
+
+    /* Ensure CTA button styling works in the overlay */
+    .main-nav .nav-cta {
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    /* Make logo color change work regardless of scroll when menu is active */
+    .main-nav.active ~ .header-container .logo h1 {
+        color: var(--light-text-color);
+    }
+    
+    /* Correct color for the X (close) icon when menu is open */
+    .main-nav.active ~ .header-container .menu-toggle {
+        color: var(--light-text-color) !important;
+    }
+}
+/* --- Mobile/Small Screens (768px and below) --- */
+@media (max-width: 768px) {
+    /* ... (Keep all existing responsive rules above this) ... */
+
+    /* === MOBILE MENU OVERLAY FIXES === */
+    
+    /* 1. Header Container Z-index FIX (No change needed from last step) */
+    .header-container {
+        position: relative; 
+        z-index: 1002; 
+    }
+
+    /* Show hamburger icon on small screens (No change needed) */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hide/Show Nav (No change needed) */
+    .main-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--primary-color); 
+        padding-top: 100px;
+        text-align: center;
+        flex-direction: column;
+        z-index: 999;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    /* State when menu is open (No change needed) */
+    .main-nav.active {
+        display: flex; 
+        opacity: 1; 
+    }
+
+    /* 2. CRITICAL FIX: FORCE LINKS TO BE WHITE using !important */
+    .main-nav a {
+        color: var(--light-text-color) !important; /* <--- ADDED !important */
+        margin: 20px 0; 
+        font-size: 1.5rem;
+        display: block; 
+        padding: 10px;
+        text-decoration: none !important; /* Ensure no unwanted underlines */
+    }
+
+    /* Ensure CTA button styling works in the overlay (No change needed) */
+    .main-nav .nav-cta {
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    /* ... (Keep the rest of the media query rules below this) ... */
+}
+/* --- New Hover Underline Styles --- */
+
+/* 1. Desktop Hover Effect */
+.main-nav a:hover {
+    /* Use a standard text-decoration underline */
+    text-decoration: underline;
+    text-decoration-thickness: 3px; /* Makes the line a bit bolder */
+    text-underline-offset: 5px; /* Moves the line away from the text */
+}
+
+/* 2. Style Adjustments for the Mobile Menu Hover (inside the @media query) */
+@media (max-width: 768px) {
+    /* ... Keep all existing responsive rules above this ... */
+
+    /* CRITICAL FIX: FORCE LINKS TO BE WHITE using !important */
+    .main-nav a {
+        color: var(--light-text-color) !important; 
+        margin: 20px 0; 
+        font-size: 1.5rem;
+        display: block; 
+        padding: 10px; 
+        text-decoration: none !important; /* Ensure no underline by default */
+    }
+    
+    /* NEW: Mobile Menu Hover Style */
+    .main-nav a:hover {
+        /* Use a standard text-decoration underline */
+        text-decoration: underline !important;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
+        /* Optionally change color slightly for feedback */
+        color: var(--secondary-accent) !important;
+    }
+    
+    /* ... Keep the rest of the media query rules below this ... */
+}
+/*
+====================================
+  1. GLOBAL VARIABLES AND RESET
+====================================
+*/
+:root {
+    --primary-color: #0c182a;         /* Very Dark Navy (Main Background) */
+    --secondary-bg-color: #f8f9fa;    /* Ultra-light gray (Contrast Sections) */
+    --accent-color: #007bff;          /* Vibrant Blue (Primary CTA/Focus) */
+    --secondary-accent: #ffb700;      /* Muted Amber/Gold (Trust/Secondary CTA) */
+    --light-text-color: #ffffff;
+    --secondary-color: #1a3854;       /* Used for form background/footer text */
+    
+    /* High-End Shadows */
+    --shadow-deep: 0 18px 50px rgba(0, 0, 0, 0.4); 
+    --shadow-soft: 0 5px 20px rgba(0, 0, 0, 0.12); 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-color);
+    line-height: 1.6; 
+}
+
+.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 0 40px; 
+}
+
+.section {
+    padding: 120px 0; 
+    position: relative;
+    overflow: hidden; 
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3.5rem; 
+    margin-bottom: 70px;
+    font-weight: 900; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-title-small {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+
+/* ------------------------------------
+  2. BUTTONS AND CTAS
+------------------------------------ */
+.btn {
+    padding: 18px 50px; 
+    border-radius: 6px; 
+    font-weight: 700;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.6);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.7); 
+}
+
+.btn-secondary-outline {
+    background: none;
+    border: 2px solid var(--light-text-color);
+    color: var(--light-text-color);
+    margin-left: 20px;
+}
+.btn-secondary-outline:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.btn-secondary-accent {
+    background-color: var(--secondary-accent);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 183, 0, 0.4);
+}
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Use this if your image is in a folder named 'images' */
+    background-image: url('images/background.png'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+/* ------------------------------------
+  4. HERO SECTION
+------------------------------------ */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background-color: var(--primary-color);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark gradient overlay + your image path */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('images/background.png') no-repeat center center/cover;
+    z-index: 1;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 5;
+    padding-top: 100px; 
+}
+
+.hero-content {
+    color: var(--light-text-color);
+    max-width: 1000px;
+}
+
+.hero-content h1 {
+    font-size: 7.5rem; 
+    font-weight: 900;
+    line-height: 1.0;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.hero-content h1 span {
+    display: block;
+    letter-spacing: 10px;
+    opacity: 0.9;
+}
+
+.hero-content .word-1 { color: var(--accent-color); font-size: 8rem; }
+.hero-content .word-2 { color: var(--secondary-accent); margin-left: 100px; }
+.hero-content .word-3 { color: var(--light-text-color); font-size: 8.5rem; }
+
+.hero-content p {
+    font-size: 1.8rem;
+    max-width: 700px;
+    margin-bottom: 60px;
+    font-weight: 300;
+    /* Adding text shadow for extra readability on the busy background */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Ensure buttons stand out */
+.cta-group {
+    display: flex;
+    gap: 20px;
+}
+/* --- Enhanced Service Section UI --- */
+.service-intro-text {
+    max-width: 800px;
+    margin-bottom: 60px;
+}
+
+.service-intro-text .lead-text {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.detail-list {
+    list-style: none;
+    margin: 25px 0;
+}
+
+.detail-list li {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.detail-list li i {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
+/* Hover effect for unique UI */
+.service-detail-card {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+.service-detail-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-deep);
+}
+/* --- ENHANCED SERVICE CARD LAYOUT --- */
+
+.apparent-services-section {
+    padding: 100px 0; /* Increased top/bottom section padding */
+}
+
+.static-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop to reduce vertical stacking */
+    gap: 30px;
+    align-items: stretch;
+}
+
+.service-detail-card.glass-card {
+    padding: 50px; /* Increased internal padding for a premium feel */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* CRITICAL: This turns your long vertical list into a 
+   compact 2-column grid to save vertical space 
+*/
+.detail-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px 20px;
+    margin: 30px 0;
+    list-style: none;
+    padding: 0;
+}
+
+.detail-list li {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    display: flex;
+    align-items: flex-start; /* Better alignment for wrapping text */
+    gap: 10px;
+    border-bottom: none !important; /* Removes dotted lines for a cleaner look */
+    padding: 5px 0;
+}
+
+/* Adjusting Card Headers */
+.card-header-group {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(0, 123, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .static-service-grid {
+        grid-template-columns: 1fr; /* Stack cards on tablet/mobile */
+    }
+}
+
+@media (max-width: 600px) {
+    .detail-list {
+        grid-template-columns: 1fr; /* Stack list items on very small screens */
+    }
+    .service-detail-card.glass-card {
+        padding: 30px;
+    }
+}
+/* --- COMPACT SERVICE CARD ENHANCEMENTS --- */
+
+/* 1. Make the cards wider to support a 2-column list */
+.static-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two large cards per row */
+    gap: 20px;
+}
+
+/* 2. Increase internal padding for a premium, spacious feel */
+.service-detail-card.glass-card {
+    padding: 45px; 
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* 3. CRITICAL: The 2-column list layout */
+.detail-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* This creates the two columns */
+    gap: 10px 25px; /* Vertical gap of 10px, Horizontal gap of 25px */
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.detail-list li {
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: none !important; /* Removes the dotted lines for a cleaner UI */
+    white-space: nowrap; /* Keeps items on a single line */
+}
+
+/* 4. Responsive Fix: Stack back to 1 column on mobile */
+@media (max-width: 760px) {
+    .static-service-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-list {
+        grid-template-columns: 1fr; /* Single column on small phones */
+    }
+}
+/* --- COMPACT HEADER ADJUSTMENTS --- */
+
+.card-header-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Reduced from 25px/30px to 10px to bring the line closer to items */
+    margin-bottom: 10px; 
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 10px; /* Reduced padding to tighten the line to the title */
+}
+
+.detail-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 8px 25px; /* Reduced vertical gap between items */
+    list-style: none;
+    padding: 0;
+    /* Reduced margin-top from 30px to 10px to pull items toward the line */
+    margin: 10px 0 20px 0; 
+}
+
+.service-detail-card.glass-card {
+    /* Slightly reduced top padding to make the whole card smaller */
+    padding: 35px 45px 30px 45px; 
+}
+/* --- Mobile Viewport Fixes (768px and below) --- */
+@media (max-width: 768px) {
+    /* 1. Header & Nav */
+    .header-container {
+        padding: 15px 20px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem; /* Scale down logo for small screens */
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--primary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex !important; /* Override display: none */
+        opacity: 1;
+        z-index: 1000;
+    }
+
+    .main-nav.active {
+        transform: translateY(0);
+    }
+
+    .main-nav a {
+        margin: 0;
+        font-size: 1.8rem;
+        color: white !important;
+    }
+
+    /* 2. Hero Section Refinement */
+    .hero-content h1 {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+    
+    .hero-content .word-1, .hero-content .word-2, .hero-content .word-3 {
+        font-size: 3.5rem;
+        margin-left: 0;
+    }
+
+    /* 3. Service Cards (The Matrix) */
+    .static-service-grid {
+        grid-template-columns: 1fr !important; /* Force single column */
+        gap: 20px;
+    }
+
+    .service-detail-card.glass-card {
+        padding: 25px; /* Compact padding for mobile */
+    }
+
+    .detail-list {
+        grid-template-columns: 1fr !important; /* Stack list items */
+        margin: 15px 0;
+    }
+
+    /* 4. Info Bar (Ergonomic Stacking) */
+    .info-bar-grid {
+        grid-template-columns: 1fr 1fr; /* 2x2 grid is better than 4x1 on mobile */
+        gap: 20px;
+    }
+
+    /* 5. About Section */
+    .about-trust-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .testimonial-bubble {
+        padding: 30px 20px;
+    }
+
+    /* 6. Footer (Form & Directions) */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .btn {
+        width: 100%; /* Full-width buttons are easier to tap with thumbs */
+        text-align: center;
+    }
+}
+
+/* Small Device Polish (under 480px) */
+@media (max-width: 480px) {
+    .info-bar-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+/* --- Updated Header Scroll Effect --- */
+/* Transitions the nav bar to solid black as you scroll down */
+#main-header.scrolled {
+    background-color: #000000 !important; /* Solid black background */
+    backdrop-filter: none; /* Removes the blur for a solid look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the logo and navigation links remain visible against solid black */
+#main-header.scrolled .logo h1,
+#main-header.scrolled .main-nav a,
+#main-header.scrolled .menu-toggle {
+    color: var(--light-text-color) !important;
+}
+
+/* --- Service Section Text Update --- */
+/* Changes "Comprehensive Automotive Excellence" and its description to black */
+.standout-title {
+    color: #000000 !important;
+    text-shadow: none; /* Removes the white/glow shadow for a clean black look */
+}
+
+.standout-text p {
+    color: #000000 !important;
+    font-weight: 500; /* Slightly bolder for better legibility on busy backgrounds */
+}
+
+/* Updates the mission statement border for 5S-style visual clarity */
+.standout-mission {
+    border-left: 5px solid var(--accent-color);
+}
+/* --- Always Solid Black Navigation --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+    /* Forces solid black from the start */
+    background-color: #000000 !important; 
+    backdrop-filter: none !important; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Maintain black background on scroll, but perhaps slim the padding for a pro look */
+#main-header.scrolled {
+    padding: 10px 0;
+    background-color: #000000 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the mobile menu matches the solid black theme */
+@media (max-width: 768px) {
+    .main-nav {
+        background-color: #000000 !important; /* Solid black for mobile overlay */
+    }
+    
+    /* Ensure links stay white against the black background */
+    .main-nav a {
+        color: #ffffff !important;
+    }
+}
+.standout-title {
+    color: #000000 !important;
+}
+
+.standout-text p {
+    color: #000000 !important;
+}
+/* ================================================
+   MOBILE RESPONSIVE OVERRIDES (index.css)
+   ================================================ */
+
+/* 1. Universal Responsive Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 2. Header & Mobile Menu Scaling */
+@media (max-width: 768px) {
+    .logo h1 {
+        font-size: 1.4rem; /* Smaller logo on phones */
+    }
+
+    /* Hide Desktop Nav and show Hamburger (assuming JS is linked) */
+    .main-nav {
+        display: none; 
+        /* Add logic for when .active class is added via JS */
+    }
+
+    .main-nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #000;
+        padding: 20px;
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger icon */
+    }
+}
+
+/* 3. Hero Section Stacking */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content .word-1, 
+    .hero-content .word-2, 
+    .hero-content .word-3 {
+        display: block; /* Stack words vertically */
+        font-size: 2.5rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons for easier tapping */
+        text-align: center;
+    }
+}
+
+/* 4. Grid Stacking (Services & Info Bar) */
+@media (max-width: 992px) {
+    .static-service-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columns for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .info-bar-grid,
+    .static-service-grid,
+    .about-trust-grid,
+    .footer-grid {
+        grid-template-columns: 1fr !important; /* Single column for phones */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-bar-section {
+        margin-top: 0; /* Remove overlap if necessary */
+    }
+
+    /* Ergonomic spacing for service cards */
+    .service-detail-card {
+        margin-bottom: 20px;
+    }
+
+    .detail-list {
+        grid-template-columns: 1fr !important; /* Force list items to stack */
+    }
+}
+
+/* 5. Map & Footer Scaling */
+@media (max-width: 768px) {
+    .footer-col {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .map-wrapper iframe {
+        height: 300px; /* Shorter map on mobile */
+    }
+}
+/* 1. Fluid Typography - Scales automatically between 2rem and 3.5rem */
+.section-title {
+    text-align: center;
+    font-size: clamp(2rem, 8vw, 3.5rem); /* Minimum 2rem, scales with width, Max 3.5rem */
+    margin-bottom: 40px; /* Reduced margin for mobile ergonomics */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Slightly tighter for mobile readability */
+    line-height: 1.1;
+    word-wrap: break-word; /* Safety net: forces long words to wrap if needed */
+}
+
+/* 2. Specific fix for the "Comprehensive" long word */
+@media (max-width: 768px) {
+    .standout-title {
+        font-size: 1.8rem !important; /* Forces a smaller size on phones */
+        padding: 0 15px; /* Ensures text doesn't touch the screen edges */
+        margin-bottom: 30px;
+    }
+}
+
+/* 3. Container Padding (Standardization) */
+.container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    overflow-x: hidden; /* Prevents horizontal 'jitter' on scroll */
+}
