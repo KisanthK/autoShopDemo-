@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | The Auto Shop Inc.</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="contact-page">
+
+    <header id="main-header" class="scrolled">
+        <div class="container header-container">
+            <div class="logo">
+                <h1>The Auto<span class="accent-color"> Shop</span> Inc.</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="home.html">Home</a> 
+                <a href="home.html#services">Services</a>
+                <a href="home.html#reviews">Reviews</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Book Appointment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contact-main">
+        <div class="contact-container">
+            
+            <div class="shop-details-panel">
+                <div class="info-block">
+                    <h3><i class="fas fa-map-marker-alt"></i> Find Us</h3>
+                    <p><strong>Address:</strong><br>19047 Old Yonge St.<br>Holland Landing, ON</p>
+                </div>
+
+                <div class="info-block">
+                    <h3><i class="fas fa-clock"></i> Hours</h3>
+                    <p>Monday—Friday: 8:00AM—6:00PM<br>
+                       Saturday: 9:00AM—12:00PM<br>
+                       Sunday: Closed</p>
+                </div>
+
+                <div class="info-block">
+                    <h3><i class="fas fa-phone"></i> Direct Line</h3>
+                    <p class="phone-number">905.895.0476</p>
+                </div>
+
+                <div class="local-seo-links">
+                    <h4>Serving Our Community</h4>
+                    <a href="#">Car Mechanic in Holland Landing</a>
+                    <a href="#">Car Mechanic in Bradford</a>
+                    <a href="#">Car Mechanic in Newmarket</a>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="accent-bar"></div>
+                <div class="form-content">
+                    <h2>Book Your Service</h2>
+                    <p>Expert care for your vehicle. Fill out the details below to request a time slot.</p>
+
+                    <form id="autoShopForm">
+                        <div class="row">
+                            <div class="field">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="e.g. Alex Smith" required>
+                            </div>
+                            <div class="field">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="(905) 000-0000" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Vehicle Year, Make, & Model</label>
+                            <input type="text" placeholder="2020 Honda Civic" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Primary Service Needed</label>
+                            <select required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option>Engine & Diagnostics</option>
+                                <option>Brakes & Vehicle Safety</option>
+                                <option>Maintenance & Fluid Exchange</option>
+                                <option>Tires, Wheels & Alignment</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Additional Details</label>
+                            <textarea rows="4" placeholder="Describe any issues..."></textarea>
+                        </div>
+
+                        <button type="submit" class="primary-btn">BOOK APPOINTMENT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="home.js"></script>
+</body>
+</html>
